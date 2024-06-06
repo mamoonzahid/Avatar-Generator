@@ -1,0 +1,117 @@
+/* Import Google font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+/* Base styling for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Styling for the body to center content vertically and horizontally */
+body {
+  min-height: 100vh;
+  width: 100%;
+  background: #009579;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px; /* Default font size */
+}
+
+/* Styling for the container holding all page elements */
+.container {
+  max-width: 430px;
+  width: 100%;
+  background: #fff;
+  padding: 20px;
+  border-radius: 7px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+/* Header styling */
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Button styling with hover effect */
+button {
+  height: 50px;
+  width: 60%;
+  font-size: 1.1rem;
+  background-color: #009579;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.4s ease, transform 0.2s ease;
+  outline: none;
+  border: 2px solid white;
+}
+
+button:hover {
+  background-color: #006653;
+  transform: translateY(-2px);
+}
+
+/* Display area for the avatar */
+#avatarDisplay {
+  margin-top: 20px;
+  width: 100%; /* Adjust width as necessary */
+  display: flex;
+  justify-content: center;
+  animation: floatUp 0.5s ease-out forwards;
+}
+
+/* Keyframe animation for items floating up on page load */
+@keyframes floatUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Styling for the avatar image and hover effect */
+.avatar {
+  width: 200px; /* Increased size for better visibility */
+  height: 200px;
+  margin: 20px auto;
+  display: block;
+  border-radius: 50%;
+  transition: transform 0.3s, filter 0.3s;
+  cursor: pointer;
+}
+
+.avatar:hover {
+  transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+/* Styling for download text, shown only on hover */
+.downloadText {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 24px; /* Increased font size for better visibility */
+  font-weight: bold;
+}
+
+.avatarContainer:hover .downloadText {
+  display: block; /* Show download text on hover */
+}
+
+/* Styling for the container that holds the avatar and download text */
+.avatarContainer {
+  position: relative;
+  text-align: center; /* Center the avatar and text */
+}

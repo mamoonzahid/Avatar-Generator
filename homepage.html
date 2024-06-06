@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Avatar Generator</title>
+    <link rel="stylesheet" href="homepage.css" />
+    <script type="module" src="homepage.js"></script>
+  </head>
+  <body>
+    <!-- Container for the entire page content -->
+    <div class="container">
+      <!-- Title for the page -->
+      <h3>
+        Hey! <span id="loggedUserFName"></span>
+        <span id="loggedUserLName"></span>
+      </h3>
+      <h1>Random Avatar Generator</h1>
+      <!-- Button to trigger avatar generation -->
+      <button onclick="generateRandomAvatar()">Generate Random Avatar</button
+      ><button id="logout">Logout</button>
+      <!-- Display area for the avatar -->
+      <div id="avatarDisplay"></div>
+    </div>
+    <script src="homepage.js"></script>
+  </body>
+</html>
