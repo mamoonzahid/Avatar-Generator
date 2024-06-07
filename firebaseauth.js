@@ -22,6 +22,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore();
 
 function showMessage(message, type) {
   const existingPopup = document.getElementById("popupMessage");
@@ -48,16 +50,16 @@ function showMessage(message, type) {
     setTimeout(() => popup.remove(), 600);
   }, 3000);
 }
-const signUp = document.getElementById("submitSignUp");
-signUp.addEventListener("click", (event) => {
+
+document.getElementById("submitSignUp").addEventListener("click", (event) => {
   event.preventDefault();
   const email = document.getElementById("rEmail").value;
   const password = document.getElementById("rPassword").value;
   const firstName = document.getElementById("fName").value;
   const lastName = document.getElementById("lName").value;
-
-  const auth = getAuth();
-  const db = getFirestore();
+  const themePreference = document.querySelector(
+    'input[name="themePreference"]:checked'
+  ).value;
 
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
@@ -66,47 +68,39 @@ signUp.addEventListener("click", (event) => {
         email: email,
         firstName: firstName,
         lastName: lastName,
+        preferences: {
+          theme: themePreference,
+        },
       };
       showMessage("Account Created Successfully", "success");
-      const docRef = doc(db, "users", user.uid);
-      setDoc(docRef, userData)
+      setDoc(doc(db, "users", user.uid), userData)
         .then(() => {
-          window.location.href = "index.html";
+          window.location.href = "homepage.html";
         })
         .catch((error) => {
-          console.error("error writing document", error);
+          console.error("Error writing document", error);
         });
     })
     .catch((error) => {
       const errorCode = error.code;
-      if (errorCode == "auth/email-already-in-use") {
-        showMessage("Email Address Already Exists !!!", "error");
-      } else {
-        showMessage("unable to create User", "error");
-      }
+      showMessage("Error: " + errorCode, "error");
     });
 });
 
-const signIn = document.getElementById("submitSignIn");
-signIn.addEventListener("click", (event) => {
+document.getElementById("submitSignIn").addEventListener("click", (event) => {
   event.preventDefault();
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  const auth = getAuth();
 
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      showMessage("login is successful", "success");
+      showMessage("Login is successful", "success");
       const user = userCredential.user;
       localStorage.setItem("loggedInUserId", user.uid);
       window.location.href = "homepage.html";
     })
     .catch((error) => {
       const errorCode = error.code;
-      if (errorCode === "auth/invalid-credential") {
-        showMessage("Incorrect Email or Password", "error");
-      } else {
-        showMessage("Account does not Exist", "error");
-      }
+      showMessage("Error: " + errorCode, "error");
     });
 });

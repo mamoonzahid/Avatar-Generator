@@ -85,30 +85,40 @@ const auth = getAuth();
 const db = getFirestore();
 
 onAuthStateChanged(auth, (user) => {
-  const loggedInUserId = localStorage.getItem("loggedInUserId");
-  if (loggedInUserId) {
-    console.log(user);
-    const docRef = doc(db, "users", loggedInUserId);
+  if (user) {
+    const docRef = doc(db, "users", user.uid); // Use user.uid instead of localStorage
     getDoc(docRef)
       .then((docSnap) => {
         if (docSnap.exists()) {
           const userData = docSnap.data();
+          console.log("User data fetched:", userData); // Debug log for fetched user data
           document.getElementById("loggedUserFName").innerText =
             userData.firstName;
-          document.getElementById("loggedUserEmail").innerText = userData.email;
           document.getElementById("loggedUserLName").innerText =
             userData.lastName;
+          // Apply theme preferences
+          applyThemePreferences(userData.preferences);
         } else {
-          console.log("no document found matching id");
+          console.log("No document found matching ID");
         }
       })
       .catch((error) => {
-        console.log("Error getting document");
+        console.log("Error getting document:", error);
       });
   } else {
-    console.log("User Id not Found in Local storage");
+    console.log("User not logged in or session expired");
   }
 });
+
+function applyThemePreferences(preferences) {
+  if (preferences && preferences.theme === "dark") {
+    document.body.classList.add("dark-theme");
+    console.log("Dark theme applied");
+  } else {
+    document.body.classList.remove("dark-theme");
+    console.log("Light theme detected or no theme preference set");
+  }
+}
 
 const logoutButton = document.getElementById("logout");
 

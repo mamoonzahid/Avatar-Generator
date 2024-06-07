@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Login & Registration Form</title>
-    <!---Custom CSS File--->
+    <!-- Custom CSS File -->
     <link rel="stylesheet" href="style.css" />
     <script type="module" src="./firebaseauth.js"></script>
   </head>
@@ -53,6 +53,25 @@
             id="rPassword"
             placeholder="Create a password"
           />
+          <!-- New theme preference radio buttons -->
+          <div class="theme-preference">
+            <input
+              type="radio"
+              id="lightTheme"
+              name="themePreference"
+              value="light"
+              checked
+            />
+            <label for="lightTheme">Light Theme</label>
+            <input
+              type="radio"
+              id="darkTheme"
+              name="themePreference"
+              value="dark"
+            />
+            <label for="darkTheme">Dark Theme</label>
+          </div>
+
           <input
             type="button"
             id="submitSignUp"

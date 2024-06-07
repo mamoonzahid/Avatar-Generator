@@ -9,11 +9,20 @@
   font-family: "Poppins", sans-serif;
 }
 
+:root {
+  --background-color: #009579; /* default light theme background */
+}
+
+.dark-theme {
+  --background-color: hsl(172, 100%, 14.5%);
+}
+
 /* Styling for the body to center content vertically and horizontally */
 body {
   min-height: 100vh;
   width: 100%;
-  background: #009579;
+  background-color: var(--background-color);
+  color: var(--text-color);
   display: flex;
   align-items: center;
   justify-content: center;
